@@ -1,0 +1,45 @@
+{
+  "title": "adagio-calendar",
+  "version": "1.0.0",
+  "description": "Popular proverbs and sayings calendar app",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "test"
+  },
+  "author": "Óscar Valente",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/common": "~2.4.0",
+    "@angular/compiler": "~2.4.0",
+    "@angular/core": "~2.4.0",
+    "@angular/forms": "~2.4.0",
+    "@angular/http": "~2.4.0",
+    "@angular/platform-browser": "~2.4.0",
+    "@angular/platform-browser-dynamic": "~2.4.0",
+    "@angular/router": "~3.4.0",
+    "angular-in-memory-web-api": "~0.2.4",
+    "core-js": "^2.4.1",
+    "moment": "^2.18.1",
+    "reflect-metadata": "^0.1.0",
+    "rxjs": "5.0.1",
+    "systemjs": "0.19.40",
+    "zone.js": "^0.7.4"
+  },
+  "devDependencies": {
+    "angular2-template-loader": "^0.6.2",
+    "awesome-typescript-loader": "^3.1.2",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "css-loader": "^0.27.3",
+    "css-to-string-loader": "^0.1.2",
+    "electron-prebuilt": "^1.4.13",
+    "file-loader": "^0.10.1",
+    "install": "^0.8.7",
+    "node-sass": "^4.5.1",
+    "raw-loader": "^0.5.1",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.16.0",
+    "webpack": "^2.3.2"
+  }
+}

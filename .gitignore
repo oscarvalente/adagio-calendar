@@ -1,0 +1,10 @@
+# IDE files
+.DS_Store
+.idea/*
+*.iml/*
+.project
+.metadata/*
+
+# Others
+dist/
+node_modules/

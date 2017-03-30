@@ -1,0 +1,10 @@
+<section>
+    <h1>{{title}}</h1>
+    <div class="calendar-body">
+        <div class="day"
+             *ngFor="let day of days"
+             [ngClass]="{'selected': day.isSelected, 'today': day.isToday }">
+            <span class="day-title">{{ day.title }}</span>
+        </div>
+    </div>
+</section>
