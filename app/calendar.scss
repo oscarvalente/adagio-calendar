@@ -1,87 +1,95 @@
-h1 {
-  color: red;
-}
+.adg-calendar {
 
-.calendar-body {
-  display: flex;
-  flex-wrap: wrap;
-  width: 900px;
-
-  .day {
-    border: 1px solid #d0d4db;
-    border-radius: 3px;
-    width: 180px;
-    height: 120px;
-    font-family: 'Estrangelo Edessa', 'cursive';
-    background-color: #f2f5f9;
+  #month-title{
     color: #101b3a;
+    font-family: 'Estrangelo Edessa', 'cursive';
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+    width: 1280px;
+  }
 
-    &.today {
-      .day-title {
-        margin-left: 12px;
-        color: #e5000a;
+  .calendar-body {
+    display: flex;
+    flex-wrap: wrap;
+    width: 1280px;
+
+    .day {
+      border: 1px solid #d0d4db;
+      border-radius: 3px;
+      width: 180px;
+      height: 120px;
+      font-family: 'Estrangelo Edessa', 'cursive';
+      background-color: #f2f5f9;
+      color: #101b3a;
+
+      &.today {
+        .day-title {
+          margin-left: 12px;
+          color: #e5000a;
+        }
       }
-    }
 
-    &.selected {
-      border-color: #76a8f7;
-      box-shadow: inset 0 0 10px 1px #c3d0e5;
+      &.selected {
+        border-color: #76a8f7;
+        box-shadow: inset 0 0 10px 1px #c3d0e5;
 
-      :before {
-        content: '';
-        background: linear-gradient(-90deg, #f2f5f9, #f21109, #f2f5f9);
-        position: absolute;
+        :before {
+          content: '';
+          background: linear-gradient(-90deg, #f2f5f9, #f21109, #f2f5f9);
+          position: absolute;
+          display: inline-block;
+          padding-left: 20px;
+          padding-top: 2px;
+          margin-top: -15px;
+          margin-left: -18px;
+
+          animation-name: highlight-day;
+          animation-duration: 0.5s;
+          animation-iteration-count: infinite;
+          animation-timing-function: cubic-bezier(0.445, 0.050, 0.550, 0.950);
+        }
+
+        @keyframes highlight-day {
+          33% {
+            margin-left: -18px;
+          }
+
+          66% {
+            margin-left: 141px;
+          }
+
+          100% {
+            margin-left: -18px;
+          }
+        }
+
+        .day-title {
+          color: #183944;
+          font-size: 50px;
+          padding: 5px 0 0 6px;
+          text-shadow: 1px 2px 4px #2c6c82;
+        }
+      }
+
+      &:not(.today), &:not(.selected) {
+        .day-title {
+          opacity: 0.55;
+        }
+      }
+
+      &.today, &.selected {
+        .day-title {
+          opacity: 1;
+        }
+      }
+
+      .day-title {
         display: inline-block;
-        padding-left: 20px;
-        padding-top: 2px;
-        margin-top: -15px;
-        margin-left: -18px;
-
-        animation-name: highlight-day;
-        animation-duration: 0.5s;
-        animation-iteration-count: infinite;
-        animation-timing-function: cubic-bezier(0.445, 0.050, 0.550, 0.950);
+        margin: 10px 0 0 8px;
+        font-size: 34px;
+        font-weight: bold;
       }
-
-      @keyframes highlight-day {
-        33% {
-          margin-left: -18px;
-        }
-
-        66% {
-          margin-left: 141px;
-        }
-
-        100% {
-          margin-left: -18px;
-        }
-      }
-
-      .day-title {
-        color: #183944;
-        font-size: 50px;
-        padding: 5px 0 0 6px;
-        text-shadow: 1px 2px 4px #2c6c82;
-      }
-    }
-
-    &:not(.today), &:not(.selected) {
-      .day-title {
-        opacity: 0.55;
-      }
-    }
-
-    &.today, &.selected {
-      .day-title {
-        opacity: 1;
-      }
-    }
-
-    .day-title {
-      display: inline-block;
-      margin: 10px 0 0 8px;
-      font-size: 34px;
-      font-weight: bold;
     }
   }
 }

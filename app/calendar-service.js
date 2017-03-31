@@ -9,17 +9,28 @@ function isDayToday(day) {
 
 @Injectable()
 export class CalendarService {
-    static buildDaysViewModel() {
+    static buildDaysViewModel(day) {
         const daysInMonth = moment().daysInMonth();
 
-        return Rx.Observable.range(1, daysInMonth)
+        const vmSource = Rx.Observable.range(1, daysInMonth)
             .map(i => {
                 let isToday = isDayToday(i);
+                let isSelected = day ? day === i : isToday;
                 return {
                     title: i,
                     isToday,
-                    isSelected: isToday
+                    isSelected
                 };
             });
+
+        if (day) {
+            return vmSource.toArray();
+        }
+
+        return vmSource;
+    }
+
+    static getMonthTitle() {
+        return moment().format('MMM');
     }
 }

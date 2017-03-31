@@ -1,9 +1,10 @@
-<section>
-    <h1>{{title}}</h1>
+<section class="adg-calendar">
+    <h2 id="month-title">{{month}}</h2>
     <div class="calendar-body">
         <div class="day"
              *ngFor="let day of days"
-             [ngClass]="{'selected': day.isSelected, 'today': day.isToday }">
+             [ngClass]="{'selected': day.isSelected, 'today': day.isToday }"
+             (click)="selectDay(day.title)">
             <span class="day-title">{{ day.title }}</span>
         </div>
     </div>
