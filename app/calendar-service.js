@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import Rx from 'rxjs/Rx';
 
+import ProverbEngine from './proverb-engine';
+
 const moment = require('moment');
 
 function isDayToday(day) {
@@ -8,29 +10,36 @@ function isDayToday(day) {
 }
 
 @Injectable()
-export class CalendarService {
-    static buildDaysViewModel(day) {
+export default class CalendarService {
+    static buildDaysViewModel() {
         const daysInMonth = moment().daysInMonth();
 
-        const vmSource = Rx.Observable.range(1, daysInMonth)
+        return Rx.Observable.range(1, daysInMonth)
             .map(i => {
                 let isToday = isDayToday(i);
-                let isSelected = day ? day === i : isToday;
                 return {
                     title: i,
                     isToday,
-                    isSelected
+                    isSelected: isToday
                 };
-            });
+            })
+            .toArray();
+    }
 
-        if (day) {
-            return vmSource.toArray();
-        }
-
-        return vmSource;
+    static updateWithSelection(day, daysVM) {
+        return Rx.Observable.from(daysVM)
+            .map(dayVM => {
+                dayVM.isSelected = dayVM.title === day;
+                return dayVM;
+            })
+            .toArray();
     }
 
     static getMonthTitle() {
         return moment().format('MMM');
+    }
+
+    static getProverbs() {
+        return ProverbEngine.getProverbsForMonth(moment().month());
     }
 }

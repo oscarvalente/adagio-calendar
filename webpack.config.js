@@ -12,8 +12,12 @@ const config = {
                 query: {
                     plugins: ['transform-decorators-legacy']
                 }
-            }, {
+            },
+            {
                 test: /\.html$/, loader: 'raw-loader', exclude: /node_modules/
+            },
+            {
+                test: /\.json$/, loader: 'json-loader', exclude: /node_modules/
             },
             {
                 test: /\.(css|scss)$/,

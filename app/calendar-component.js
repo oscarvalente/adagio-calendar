@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
-import {CalendarService} from './calendar-service';
-
+import CalendarService from './calendar-service';
 
 @Component({
     selector: 'adg-calendar',
@@ -10,19 +9,25 @@ import {CalendarService} from './calendar-service';
 })
 export class CalendarComponent {
     constructor() {
-        this.title = 'Adagio Calendar';
         this.month = CalendarService.getMonthTitle();
         this.days = [];
-        CalendarService.buildDaysViewModel().subscribe((day) => {
-            this.days.push(day);
+
+        CalendarService.buildDaysViewModel().subscribe((days) => {
+            this.setDays(days);
+        });
+
+        CalendarService.getProverbs().subscribe(({proverb, dayIndex}) => {
+            this.days[dayIndex].proverb = proverb;
         });
     }
 
     selectDay(day) {
-        CalendarService.buildDaysViewModel(day).subscribe((days) => {
-            this.days = days;
+        CalendarService.updateWithSelection(day, this.days).subscribe((days) => {
+            this.setDays(days);
         });
     }
 
-
+    setDays(days) {
+        this.days = days;
+    }
 }

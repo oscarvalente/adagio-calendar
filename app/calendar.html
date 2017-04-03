@@ -6,6 +6,8 @@
              [ngClass]="{'selected': day.isSelected, 'today': day.isToday }"
              (click)="selectDay(day.title)">
             <span class="day-title">{{ day.title }}</span>
+            <span class="day-proverb"
+                  *ngIf="day.proverb">{{ day.proverb }}</span>
         </div>
     </div>
 </section>
