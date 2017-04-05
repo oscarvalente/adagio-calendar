@@ -17,7 +17,8 @@
     .day {
       border: 1px solid #d0d4db;
       border-radius: 3px;
-      width: 180px;
+      width: 170px;
+      padding: 0 8px;
       height: 120px;
       font-family: 'Estrangelo Edessa', 'cursive';
       background-color: #f2f5f9;
@@ -32,52 +33,6 @@
       &.selected {
         border-color: #76a8f7;
         box-shadow: inset 0 0 10px 1px #c3d0e5;
-
-        > *:first-child:before {
-          content: '';
-          background: linear-gradient(-90deg, #D09, #F21127, #D09);
-          box-shadow: 0 0 3px #ff0e4d;
-          position: absolute;
-          display: inline-block;
-          padding-left: 2px;
-          padding-top: 2px;
-          margin-left: -14px;
-          margin-top: -15px;
-
-          animation-name: day-highlight;
-          animation-duration: 3.5s;
-          animation-iteration-count: infinite;
-          animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
-        }
-
-        @keyframes day-highlight {
-          0% {
-            margin-left: -14px;
-            margin-top: -15px;
-          }
-
-          25% {
-            margin-left: 164px;
-            margin-top: -15px;
-          }
-
-          50% {
-            box-shadow: 0 0 6px #ff0e4d;
-            margin-left: 164px;
-            margin-top: 103px;
-          }
-
-          75% {
-            margin-left: -14px;
-            margin-top: 103px;
-          }
-
-          100% {
-            box-shadow: 0 0 3px #ff0e4d;
-            margin-left: -14px;
-            margin-top: -15px;
-          }
-        }
 
         .day-title {
           color: #183944;
@@ -100,8 +55,8 @@
       }
 
       .day-title {
-        display: inline-block;
-        margin: 10px 0 0 8px;
+        display: block;
+        margin: 10px 0 6px 8px;
         font-size: 34px;
         font-weight: bold;
       }

@@ -7,9 +7,16 @@ const Moment = require('moment');
 const momentRange = require('moment-range');
 const moment = momentRange.extendMoment(Moment);
 
-const DATE_RANGE_KEY = /^([0-9]{1,2}\/{1}[0-9]{1,2}\-?){2}\n?$/gi; // TODO IMPROVE DAY/MONTH VALIDATION
-const DATE_ENUM_KEY = /^([[0-9]{1,2}\/{1}[0-9]{1,2}\,?)*\n?$/gi;
-const RANDOM_KEY = 'random';
+const REGEX = {
+    DATE_RANGE: /^([0-9]{1,2}\/{1}[0-9]{1,2}\-?){2}\n?$/gi, // TODO IMPROVE DAY/MONTH VALIDATION
+    DATE_ENUM: /^([[0-9]{1,2}\/{1}[0-9]{1,2}\,?)*\n?$/gi,
+    WEEKDAY_ENUM: /^((sun|mon|tue|wed|thu|fri|sat)\,?)*\n?$/gi
+};
+const KEYS = {
+    RANDOM: 'random',
+    SEASONS: 'seasons',
+    FESTIVE_SEASONS: 'festive seasons'
+};
 
 const PROVERB_PRIORITY = [
     {
@@ -25,6 +32,10 @@ const PROVERB_PRIORITY = [
         fn: getDateRangeProverbs
     },
     {
+        category: 'FESTIVE_SEASON',
+        fn: getFestiveSeasonProverbs
+    },
+    {
         category: 'MONTH',
         fn: getMonthProverbs
     },
@@ -33,10 +44,20 @@ const PROVERB_PRIORITY = [
         fn: getSeasonProverbs
     },
     {
+        category: 'WEEKDAY',
+        fn: getWeekdayProverbs
+    },
+    {
         category: 'RANDOM',
         fn: getRandomProverbs
     }
 ];
+
+function getMomentByDateKey(dateKey) {
+    const dateValue = dateKey.split('/');
+    const dateMonth = parseInt(dateValue[1]) - 1;
+    return moment([moment().year(), dateMonth, dateValue[0]]);
+}
 
 function getRandomNumberUpTo(max) {
     return Math.floor((Math.random() * max));
@@ -66,7 +87,7 @@ function isDateKeyBetweenDates(dateKey, beginDateKey, endDateKey) {
 }
 
 function isDateInRange(dateKey, key) {
-    if (key.match(DATE_RANGE_KEY)) {
+    if (key.match(REGEX.DATE_RANGE)) {
         const dates = key.split('-');
         return isDateKeyBetweenDates(dateKey, dates[0], dates[1]);
     }
@@ -75,15 +96,28 @@ function isDateInRange(dateKey, key) {
 }
 
 function isDateInEnum(dateKey, key) {
-    return key.match(DATE_ENUM_KEY) && key.split(',').indexOf(dateKey) >= 0;
+    return key.match(REGEX.DATE_ENUM) && key.split(',').indexOf(dateKey) >= 0;
+}
+
+function isFestiveSeason(dateKey) {
+    return Object.keys(SeasonConfig[KEYS.FESTIVE_SEASONS]).indexOf(dateKey) >= 0;
 }
 
 function isSeason(dateKey) {
-    return Object.keys(SeasonConfig).indexOf(dateKey) >= 0;
+    return Object.keys(SeasonConfig[KEYS.SEASONS]).indexOf(dateKey) >= 0;
+}
+
+function isDateInFestiveSeason(dateKey, key) {
+    return isFestiveSeason(key) &&
+        isDateInRange(dateKey, SeasonConfig[KEYS.FESTIVE_SEASONS][key]);
 }
 
 function isDateInSeason(dateKey, key) {
-    return isSeason(key) && isDateInRange(dateKey, SeasonConfig[key]);
+    return isSeason(key) && isDateInRange(dateKey, SeasonConfig[KEYS.SEASONS][key]);
+}
+
+function isDateInWeekday(dateKey, key) {
+    return key.match(REGEX.WEEKDAY_ENUM) && key.split(',').indexOf(dateKey) >= 0;
 }
 
 function flattenArray(array) {
@@ -110,14 +144,28 @@ function getDateRangeProverbs(dateKey) {
         .map(key => Proverbs[key]));
 }
 
+function getFestiveSeasonProverbs(dateKey) {
+    const proverbsKeys = Object.keys(Proverbs);
+    return flattenArray(proverbsKeys.filter(key => isDateInFestiveSeason(dateKey, key))
+        .map(key => Proverbs[key]));
+}
+
 function getSeasonProverbs(dateKey) {
     const proverbsKeys = Object.keys(Proverbs);
     return flattenArray(proverbsKeys.filter(key => isDateInSeason(dateKey, key))
         .map(key => Proverbs[key]));
 }
 
+function getWeekdayProverbs(dateKey) {
+    const proverbsKeys = Object.keys(Proverbs);
+    const momentDateKey = getMomentByDateKey(dateKey);
+    const weekday = moment(momentDateKey).format('ddd').toLowerCase();
+    return flattenArray(proverbsKeys.filter(key => isDateInWeekday(weekday, key))
+        .map(key => Proverbs[key]));
+}
+
 function getRandomProverbs() {
-    return Proverbs[RANDOM_KEY];
+    return Proverbs[KEYS.RANDOM];
 }
 
 function buildProverbsByPriority(priorityConfig, configParams) {
@@ -157,7 +205,7 @@ export default class ProverbEngine {
                 const date = moment([currentYear, monthIndex, i]);
                 const dateKey = formatDateKey(date);
                 const month = getMonthForDate(date);
-                const proverbsPriorityParams = [dateKey, dateKey, dateKey, month, dateKey,];
+                const proverbsPriorityParams = [dateKey, dateKey, dateKey, dateKey, month, dateKey, dateKey,];
                 const prioritizedProverbs = buildProverbsByPriority(PROVERB_PRIORITY, proverbsPriorityParams);
                 const randomIndex = getRandomNumberUpTo(prioritizedProverbs.list.length);
                 const suggestedProverb = prioritizedProverbs.list[randomIndex];

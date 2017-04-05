@@ -108,10 +108,18 @@
         "Em Abril águas mil!",
         "A água com que no verão se há-de regar, em Abril há-de ficar."
     ],
+    "may": [
+        "Em Maio comem-se as cerejas ao borralho."
+    ],
     "jun": [
-        "Não há maior amigo que o junho com seu trigo.",
+        "Não há maior amigo que o Junho com seu trigo.",
         "Sol de junho madruga muito.",
         "Em Junho, foicinha no punho."
+    ],
+    "aug": [
+        "1º de Agosto 1º de Inverno.",
+        "Agosto, frio no rosto.",
+        "Em Agosto, volta-se ao posto."
     ],
     "sep": [
         "Lua nova setembrina sete meses declina."
@@ -140,9 +148,6 @@
     "11/11": [
         "Em dia de S. Martinho vai à adega e prova o vinho."
     ],
-    "10/4-3/5": [
-        "Miguel larilas"
-    ],
     "spring": [
         "Uma flor não faz Primavera.",
         "Uma andorinha não faz Primavera.",
@@ -154,14 +159,10 @@
         "Pão de hoje, carne de ontem, vinho do outro Verão, fazem um homem são.",
         "Quem no verão colhe, no inverno come.",
         "A burra de vilão, mula é no verão.",
-        "No Verão o sol dá paixão.",
-        "Ande por onde andar o verão, há-de vir no S. João."
+        "No Verão o sol dá paixão."
     ],
     "winter": [
         "Quem no verão colhe, no inverno come."
-    ],
-    "easter": [
-        "Páscoa linda!"
     ],
     "s joao": [
         "Ande por onde andar o verão, há-de vir no S. João."
