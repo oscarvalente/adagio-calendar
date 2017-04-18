@@ -1,8 +1,11 @@
+const path = require('path');
+const ElectronConnectWebpackPlugin = require('electron-connect-webpack-plugin');
+
 const config = {
-    context: __dirname + '/app',
+    context: path.join(__dirname, 'app'),
     entry: './app.js',
     output: {
-        path: __dirname + '/dist',
+        path: path.join(__dirname, 'dist'),
         filename: 'bundle.js'
     },
     module: {
@@ -10,7 +13,8 @@ const config = {
             {
                 test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/,
                 query: {
-                    plugins: ['transform-decorators-legacy']
+                    plugins: ['transform-decorators-legacy'],
+                    presets: ['es2015', 'stage-0']
                 }
             },
             {
@@ -28,9 +32,13 @@ const config = {
                 loader: 'file?title=assets/[title].[hash].[ext]'
             }
         ]
-    }
+    },
+    plugins: [
+        new ElectronConnectWebpackPlugin({
+            path: __dirname
+        })
+    ],
+    devtool: 'source-map'
 };
-
-config.devtool = 'source-map';
 
 module.exports = config;

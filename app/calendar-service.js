@@ -11,8 +11,8 @@ function isDayToday(day) {
 
 @Injectable()
 export default class CalendarService {
-    static buildDaysViewModel() {
-        const daysInMonth = moment().daysInMonth();
+    static buildDaysViewModel(month = moment().month()) {
+        const daysInMonth = moment().month(month).daysInMonth();
 
         return Rx.Observable.range(1, daysInMonth)
             .map(i => {
@@ -26,7 +26,7 @@ export default class CalendarService {
             .toArray();
     }
 
-    static updateWithSelection(day, daysVM) {
+    static updateWithSelection(day, daysVM = []) {
         return Rx.Observable.from(daysVM)
             .map(dayVM => {
                 dayVM.isSelected = dayVM.title === day;
@@ -35,11 +35,25 @@ export default class CalendarService {
             .toArray();
     }
 
-    static getMonthTitle() {
-        return moment().format('MMM');
+    static buildDaysViewModelWithProverbs(month = moment().month()) {
+        const proverbsSource = ProverbEngine.getProverbsForMonth(month);
+        const daysVMSource = CalendarService.buildDaysViewModel(month);
+        return daysVMSource.mergeMap((days) => {
+            return proverbsSource.map(({dayIndex, proverb}, index) => {
+                days[dayIndex].proverb = proverb;
+                return days[dayIndex];
+            });
+        });
+
+        /*dayProverb.proverb = dayProverb.proverb;
+         return dayProverb;*/
     }
 
-    static getProverbs() {
-        return ProverbEngine.getProverbsForMonth(moment().month());
+    static getMonthTitle(month = moment().month()) {
+        return moment().month(month).format('MMMM');
+    }
+
+    static getProverbs(month = moment().month()) {
+        return ProverbEngine.getProverbsForMonth(month);
     }
 }

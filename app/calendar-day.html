@@ -1,0 +1,8 @@
+<div class="calendar-day"
+     [ngClass]="{'selected': day?.isSelected, 'today': day?.isToday }">
+    <span class="day-title">{{ day?.title }}</span>
+    <p class="day-proverb"
+          [ngClass]="{'has-proverb': day.proverb}">
+        {{ day?.proverb }}
+    </p>
+</div>

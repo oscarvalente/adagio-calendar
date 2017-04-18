@@ -1,0 +1,44 @@
+.calendar-month {
+  height: 140px;
+  display: flex;
+  justify-content: center;
+
+  > * {
+    align-self: center;
+  }
+
+  #month-title {
+    color: #101b3a;
+    font-family: 'Estrangelo Edessa', 'cursive';
+    font-size: 60px;
+    width: 27%;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .left-arrow, .right-arrow {
+    width: 30px;
+    height: 40px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    padding: 0 20px;
+  }
+
+  .left-arrow {
+    text-shadow: -11px 1px 2px #AAA;
+
+    &:after {
+      content: '<';
+    }
+  }
+
+  .right-arrow {
+    text-shadow: 11px 1px 2px #AAA;
+
+    &:after {
+      content: '>';
+    }
+  }
+}

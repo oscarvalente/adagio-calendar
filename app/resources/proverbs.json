@@ -102,11 +102,15 @@
         "Luar de Janeiro não tem parceiro."
     ],
     "mar": [
-        "Março marçagão, manhã de inverno, tarde de verão, e há noite focinho de cão."
+        "Março marçagão, manhã de inverno, tarde de verão, e há noite focinho de cão.",
+        "Março enguiaço!"
     ],
     "apr": [
         "Em Abril águas mil!",
-        "A água com que no verão se há-de regar, em Abril há-de ficar."
+        "A água com que no verão se há-de regar, em Abril há-de ficar.",
+        "Em Abril queima a velha o carro e o carril.",
+        "Em Abril sai às mil (enguias)!",
+        "Abril frio e molhado enche o celeiro e farta o gado"
     ],
     "may": [
         "Em Maio comem-se as cerejas ao borralho."
@@ -166,5 +170,10 @@
     ],
     "s joao": [
         "Ande por onde andar o verão, há-de vir no S. João."
+    ],
+    "easter": [
+        "Páscoa alta, chumbo na malta.",
+        "Semana de Ramos lavam-se os panos.",
+        "Semana da Paixão lavar-se-ão ou não."
     ]
 }

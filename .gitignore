@@ -5,6 +5,9 @@
 .project
 .metadata/*
 
+# NPM
+npm-debug.log
+
 # Others
 dist/
 node_modules/

@@ -1,6 +1,10 @@
 import {Component} from '@angular/core';
 import CalendarService from './calendar-service';
 
+function setProverb(proverb, day) {
+    day.proverb = proverb;
+}
+
 @Component({
     selector: 'adg-calendar',
     styles: [require('./calendar.scss')],
@@ -8,26 +12,39 @@ import CalendarService from './calendar-service';
     providers: [CalendarService]
 })
 export class CalendarComponent {
-    constructor() {
+    ngOnInit() {
         this.month = CalendarService.getMonthTitle();
-        this.days = [];
 
-        CalendarService.buildDaysViewModel().subscribe((days) => {
-            this.setDays(days);
-        });
+        this.daysSubscription = CalendarService.buildDaysViewModel()
+            .subscribe((days) => {
+                this.days = days;
+                this.ready = true;
+            });
 
-        CalendarService.getProverbs().subscribe(({proverb, dayIndex}) => {
-            this.days[dayIndex].proverb = proverb;
-        });
+        this.proverbsSubscription = CalendarService.getProverbs()
+            .subscribe(({proverb, dayIndex}) =>
+                setProverb(proverb, this.days[dayIndex])
+            );
+    }
+
+    ngOnDestroy() {
+        this.daysSubscription.unsubscribe();
+        this.proverbsSubscription.unsubcribe();
     }
 
     selectDay(day) {
-        CalendarService.updateWithSelection(day, this.days).subscribe((days) => {
-            this.setDays(days);
-        });
+        CalendarService.updateWithSelection(day, this.days)
+            .subscribe((days) =>
+                this.days = days
+            );
     }
 
-    setDays(days) {
-        this.days = days;
+    onMonthChange(newMonth) {
+        this.days = [];
+        CalendarService.buildDaysViewModelWithProverbs(newMonth)
+            .subscribe((day) => {
+                this.days.push(day);
+            });
     }
+
 }
