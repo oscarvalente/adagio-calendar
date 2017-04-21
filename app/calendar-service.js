@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import Rx from 'rxjs/Rx';
 
-import ProverbEngine from './proverb-engine';
+import ProverbEngine from './proverbs/proverb-engine';
 
 const moment = require('moment');
 

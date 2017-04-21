@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import CalendarService from './calendar-service';
+import CalendarService from '../calendar-service';
 
 
 const moment = require('moment');

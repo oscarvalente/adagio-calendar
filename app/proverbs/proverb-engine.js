@@ -1,8 +1,8 @@
 import Rx from 'rxjs/Rx';
-import Proverbs from './resources/proverbs.json';
-import SeasonConfig from './resources/season-config.json';
+import Proverbs from '../resources/proverbs.json';
+import SeasonConfig from '../resources/season-config.json';
 import _ from 'lodash';
-import LLL from './proverbs.js';
+import LLL from './proverbs-map.js';
 
 let ProverbsList = _.cloneDeep(Proverbs);
 const Moment = require('moment');
@@ -62,8 +62,8 @@ function getRandomNumberUpTo(max) {
     return Math.floor((Math.random() * max));
 }
 
-function getMonthForDate(date) {
-    return moment(date).format('MMM');
+function formatMonthForDate(date) {
+    return moment(date).format('MMM').toLowerCase();
 }
 
 function formatDateKey(date) {
@@ -145,8 +145,8 @@ function getDayProverbs(proverbs, day) {
     return proverbs[day];
 }
 
-function getMonthProverbs(proverbs, monthTLA) {
-    return proverbs[monthTLA.toLowerCase()];
+function getMonthProverbs(proverbs, month) {
+    return proverbs[month];
 }
 
 function getDateEnumProverbs(proverbs, dateKey) {
@@ -212,18 +212,10 @@ function discardProverb(proverb) {
 
 export default class ProverbEngine {
     static getProverbsForMonth(month) {
-        let l = new LLL({
-            random: [
-                'fornix',
-                'cenas'
-            ],
-            IGOR: [
-                'baaah!'
-            ]
-        });
-        l.discardProverb('fornix');
-
         moment.locale('en');
+
+        let l = new LLL([]);
+
         try {
             const currentYear = moment().year();
             const monthIndex = moment().month(month).month();
@@ -234,7 +226,7 @@ export default class ProverbEngine {
                 while (++i <= daysInMonth) {
                     const date = moment([currentYear, monthIndex, i]);
                     const dateKey = formatDateKey(date);
-                    const month = getMonthForDate(date);
+                    const month = formatMonthForDate(date);
 
 
                     const proverbsPriorityParams = [dateKey, dateKey, dateKey, dateKey, month, dateKey, dateKey,];

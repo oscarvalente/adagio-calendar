@@ -1,9 +1,9 @@
 import {NgModule}      from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
-import {CalendarComponent}  from './calendar-component';
-import {CalendarMonthComponent}  from './calendar-month-component';
-import {CalendarDayComponent}  from './calendar-day-component';
+import {CalendarComponent}  from './calendar/calendar-component';
+import {CalendarMonthComponent}  from './calendar-month/calendar-month-component';
+import {CalendarDayComponent}  from './calendar-day/calendar-day-component';
 
 const moment = require('moment');
 
