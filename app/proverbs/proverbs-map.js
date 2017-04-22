@@ -26,8 +26,7 @@ export default class ProverbsMap {
     toPrioritizedList(config, configParams) {
         let proverbArray = [];
         for (let i = 0; i < config.length; i++) {
-            const fn = config[i].fn.bind(null, this.proverbs);
-            proverbArray = configParams[i] ? fn(configParams[i]) : fn();
+            proverbArray = Reflect.apply(config[i].fn, this, [configParams[i]]);
             if (!_.isEmpty(proverbArray)) {
                 return proverbArray;
             }
@@ -56,13 +55,14 @@ export default class ProverbsMap {
 
     getDateEnumProverbs(dateKey) {
         const proverbsKeys = Object.keys(this.proverbs);
-        return GenericHelper.flattenArray(proverbsKeys.filter(key => DateHelper.isDateInEnum(dateKey, key))
+        return GenericHelper.flattenArray(proverbsKeys.filter(key =>
+            DateHelper.isDateInEnum(dateKey, key))
             .map(key => this.proverbs[key]));
     }
 
     getDateRangeProverbs(dateKey) {
         const proverbsKeys = Object.keys(this.proverbs);
-        return flattenArray(proverbsKeys.filter(key => DateHelper.isDateInRange(dateKey, key))
+        return GenericHelper.flattenArray(proverbsKeys.filter(key => DateHelper.isDateInRange(dateKey, key))
             .map(key => this.proverbs[key]));
     }
 

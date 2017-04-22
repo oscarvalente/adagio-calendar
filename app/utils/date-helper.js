@@ -67,8 +67,8 @@ export default class DateHelper {
     }
 
     static isDateInSeason(dateKey, key, seasonConfigObj, seasonsKey) {
-        return isSeason(key, seasonConfigObj) &&
-            isDateInRange(dateKey, seasonConfigObj[seasonsKey][key], DATE_REGEX.DATE_RANGE);
+        return isSeason(key, seasonConfigObj, seasonsKey) &&
+            DateHelper.isDateInRange(dateKey, seasonConfigObj[seasonsKey][key], DATE_REGEX.DATE_RANGE);
     }
 
     static isDateInEnum(dateKey, key) {
@@ -92,5 +92,13 @@ export default class DateHelper {
 
     static formatWeekday(date) {
         return moment(date).format('ddd').toLowerCase();
+    }
+
+    static getMonthIndex(month) {
+        return moment().month(month).month();
+    }
+
+    static getDaysInMonth(year, monthIndex) {
+        return moment([year, monthIndex]).daysInMonth();
     }
 }
