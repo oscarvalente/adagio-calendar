@@ -16,10 +16,6 @@ export default class ProverbsMap {
             FESTIVE_SEASONS: 'festive seasons'
         };
 
-        this.REGEX = {
-            SEASON_STRATEGY: /^[a-z]*[A-Za-z]*$/g
-        };
-
         getProverbsByCategory = getProverbsByCategory.bind(this);
     }
 
@@ -69,8 +65,7 @@ export default class ProverbsMap {
     getFestiveSeasonProverbs(dateKey) {
         const proverbsKeys = Object.keys(this.proverbs);
         return GenericHelper.flattenArray(proverbsKeys.filter(key =>
-            DateHelper.isDateInFestiveSeason(dateKey, key, this.seasonConfig, this.CATEGORIES.FESTIVE_SEASONS,
-                this.REGEX.SEASON_STRATEGY))
+            DateHelper.isDateInFestiveSeason(dateKey, key, this.seasonConfig, this.CATEGORIES.FESTIVE_SEASONS))
             .map(key => this.proverbs[key]));
     }
 

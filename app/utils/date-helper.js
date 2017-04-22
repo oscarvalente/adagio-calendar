@@ -1,3 +1,5 @@
+import DynamicSeasonsHelper from './dynamic-seasons-helper';
+
 const Moment = require('moment');
 const momentRange = require('moment-range');
 const moment = momentRange.extendMoment(Moment);
@@ -6,10 +8,6 @@ const DATE_REGEX = {
     DATE_RANGE: /^([0-9]{1,2}\/{1}[0-9]{1,2}\-?){2}\n?$/gi, // TODO IMPROVE DAY/MONTH VALIDATION
     DATE_ENUM: /^([[0-9]{1,2}\/{1}[0-9]{1,2}\,?)*\n?$/gi,
     WEEKDAY_ENUM: /^((sun|mon|tue|wed|thu|fri|sat)\,?)*\n?$/gi
-};
-
-const DIRECTORIES = {
-    SEASONS_STRATEGY: './seasons-strategies/'
 };
 
 function isSeason(dateKey, seasonConfigObj, seasonsKey) {
@@ -28,12 +26,10 @@ function isDateKeyBetweenDates(dateKey, beginDateKey, endDateKey) {
     return isDateBetweenDates(dateKeyDate, beginDate, endDate);
 }
 
-function isDateInDynamicRange(dateKey, key, seasonConfigObj, festiveSeasonsKey,
-                              seasonStrategyRegex, seasonsStrategyDir) {
-    const strategyAlgName = seasonConfigObj[festiveSeasonsKey][key];
-    if (strategyAlgName.match(seasonStrategyRegex)) {
-        const strategyAlg = require(seasonsStrategyDir + strategyAlgName + '.js');
-        const seasonDateRange = strategyAlg(moment().year());
+function isDateInDynamicRange(dateKey, key, seasonConfigObj, festiveSeasonsKey) {
+    const strategyName = seasonConfigObj[festiveSeasonsKey][key];
+    if (DynamicSeasonsHelper.isValid(strategyName)) {
+        const seasonDateRange = DynamicSeasonsHelper.calcDateRange(strategyName);
         const dateFromDateKey = DateHelper.buildDateFromDateKey(dateKey);
 
         return isDateBetweenDates(dateFromDateKey, seasonDateRange.from, seasonDateRange.to);
@@ -75,11 +71,10 @@ export default class DateHelper {
         return key.match(DATE_REGEX.DATE_ENUM) && key.split(',').indexOf(dateKey) >= 0;
     }
 
-    static isDateInFestiveSeason(dateKey, key, seasonConfigObj, festiveSeasonsKey, seasonStrategyRegex) {
+    static isDateInFestiveSeason(dateKey, key, seasonConfigObj, festiveSeasonsKey) {
         return isFestiveSeason(key, seasonConfigObj, festiveSeasonsKey) &&
             (DateHelper.isDateInRange(dateKey, seasonConfigObj[festiveSeasonsKey][key], DATE_REGEX.DATE_RANGE) ||
-            isDateInDynamicRange(dateKey, key, seasonConfigObj, festiveSeasonsKey, seasonStrategyRegex,
-                DIRECTORIES.SEASONS_STRATEGY));
+            isDateInDynamicRange(dateKey, key, seasonConfigObj, festiveSeasonsKey));
     }
 
     static formatMonthForDate(date) {
