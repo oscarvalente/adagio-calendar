@@ -5,7 +5,7 @@ const DIRECTORIES = {
 };
 
 const REGEX = {
-    SEASON_STRATEGY: /^[a-z]*[A-Za-z]*$/g
+    SEASON_STRATEGY: /^[a-z]*[A-Za-z\-]*$/g
 };
 
 export default class DynamicSeasonsHelper {
@@ -14,7 +14,7 @@ export default class DynamicSeasonsHelper {
         return strategyAlg(moment().year());
     }
 
-    static isValid(strategyName) {
+    static isNameValid(strategyName) {
         return strategyName.match(REGEX.SEASON_STRATEGY);
     }
 }

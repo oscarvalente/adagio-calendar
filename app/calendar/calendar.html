@@ -1,13 +1,17 @@
 <section class="adg-calendar">
-    <div class="calendar-body" *ngIf="ready">
-        <adg-calendar-month
-                [month-vm]="month"
-                (onMonthChange)="onMonthChange($event)"></adg-calendar-month>
-        <div class="days">
-            <adg-calendar-day
-                    *ngFor="let currentDay of days"
-                    [day-vm]="currentDay"
-                    (click)="selectDay(currentDay.title)"></adg-calendar-day>
+    <div class="container" *ngIf="ready">
+        <div class="calendar-header" *ngIf="ready">
+            <adg-calendar-month
+                    [month-vm]="month"
+                    (onMonthChange)="onMonthChange($event)"></adg-calendar-month>
+        </div>
+        <div class="calendar-body" *ngIf="ready">
+            <div class="days">
+                <adg-calendar-day
+                        *ngFor="let currentDay of days"
+                        [day-vm]="currentDay"
+                        (click)="selectDay(currentDay.title)"></adg-calendar-day>
+            </div>
         </div>
     </div>
 </section>

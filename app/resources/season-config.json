@@ -7,6 +7,9 @@
     },
     "festive seasons": {
         "easter": "computus",
+        "carnival": "carnem-vale",
+        "carnival-day": "carnem-vale-dies",
+        "lent": "quattuor",
         "christmas": "13/12-29/12",
         "s joao": "23/6-24/6"
     }

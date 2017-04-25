@@ -8,9 +8,19 @@ import {Component, Input} from '@angular/core';
 export class CalendarDayComponent {
     @Input('day-vm') dayVM;
 
+    ngOnInit() {
+        this.styles = {
+            isMagnified: false
+        };
+    }
+
     ngOnChanges(changes) {
         if (changes['dayVM']) {
             this.day = changes.dayVM.currentValue;
         }
+    }
+
+    magnifyProverb() {
+        this.styles.isMagnified = true;
     }
 }

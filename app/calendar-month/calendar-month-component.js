@@ -21,14 +21,12 @@ export class CalendarMonthComponent {
     }
 
     previous() {
-        const nextMonth = moment().month(this.month).subtract(1, 'months').month();
-        this.month = CalendarService.getMonthTitle(nextMonth);
-        this.onMonthChange.emit(nextMonth);
+        const previousMonth = moment().month(this.month).subtract(1, 'months').month();
+        this.onMonthChange.emit(previousMonth);
     }
 
     next() {
         const nextMonth = moment().month(this.month).add(1, 'months').month();
-        this.month = CalendarService.getMonthTitle(nextMonth);
         this.onMonthChange.emit(nextMonth);
     }
 }

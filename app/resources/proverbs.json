@@ -35,7 +35,7 @@
         "Pai não tiveste, mãe não temeste, diabo te fizeste.",
         "Para grandes males, grandes remédios.",
         "Patrão fora, dia santo na loja.",
-        "Diz-me com quem andas dir-te-ei quem tu és.",
+        "Diz-me com quem andas dir-te-ei quem és.",
         "Guarda o que não presta, acharás o que é preciso.",
         "Quem conta com panela alheia, arrisca-se a ficar sem ceia.",
         "Não se pode agradar a Gregos e a Troianos.",
@@ -84,7 +84,7 @@
         "O bom filho à casa torna.",
         "Os homens não se medem aos palmos.",
         "Quem não se sente, é porque está doente.",
-        "Palavra leva-as o vento.",
+        "Palavras leva-as o vento.",
         "Mal por mal, mais vale na cadeia, que no Hospital.",
         "Nem tanto ao mar, nem tanto à terra.",
         "O comer e o coçar, vai no começar.",
@@ -95,22 +95,38 @@
         "A falar é que a gente se entende.",
         "Bom livro, bom amigo.",
         "Aquele que está de pé, acautele-se para que não caia.",
-        "Até morrer, estamos sempre a aprender."
+        "Até morrer, estamos sempre a aprender.",
+        "Sinal no braço, homem de desembaraço.",
+        "Sinal na perna, mulher de taberna.",
+        "Sinal no pescoço, sinal de bom moço.",
+        "Enquanto se capa não se assobia."
     ],
     "jan": [
         "Janeiro fora mais uma hora, e se bem souber contar hora e meia há-de achar.",
-        "Luar de Janeiro não tem parceiro."
+        "Luar de Janeiro não tem parceiro.",
+        "Calças brancas em Janeiro é sinal de pouco juízo ou de pouco dinheiro."
+    ],
+    "feb": [
+        "Quer no começo, quer no fundo, em Fevereiro vem o Entrudo."
     ],
     "mar": [
         "Março marçagão, manhã de inverno, tarde de verão, e há noite focinho de cão.",
-        "Março enguiaço!"
+        "Março enguiaço!",
+        "Quando vem Março ventoso, Abril sai chuvoso.",
+        "Inverno de Março e seca de Abril, deixam o lavrador a pedir."
     ],
     "apr": [
         "Em Abril águas mil!",
         "A água com que no verão se há-de regar, em Abril há-de ficar.",
         "Em Abril queima a velha o carro e o carril.",
-        "Em Abril sai às mil (enguias)!",
-        "Abril frio e molhado enche o celeiro e farta o gado"
+        "Em Abril sai às mil! (enguias)",
+        "Abril frio e molhado enche o celeiro e farta o gado.",
+        "Por Abril, corta um cardo, nasceram mil.",
+        "Abril, Abril, está cheio o covil.",
+        "Não há mês mais irritado do que Abril zangado.",
+        "No princípio ou no fim, costuma Abril a ser ruim.",
+        "Quem em Abril não varre a eira e em Maio não rega a leira, anda todo o ano em canseira.",
+        "Abril molhado, sete vezes trovejado."
     ],
     "may": [
         "Em Maio comem-se as cerejas ao borralho."
@@ -135,7 +151,9 @@
         "Não ha Sábado sem sol, domingo sem missa e segunda sem preguiça."
     ],
     "christmas": [
-        "Pelo Natal saltinho de pardal."
+        "Pelo Natal saltinho de pardal.",
+        "No Natal semeia o alhal, mas se o quiseres cabeçudo, fá-lo no Entrudo.",
+        "Do Natal ao Entrudo é um mês que nem um burro e, quem bem contar, sete semanas lhe há-de achar."
     ],
     "22/1,2/2": [
         "Muito manda São Vicente de Ferreira, mas mais manda Maria candeeira."
@@ -175,5 +193,22 @@
         "Páscoa alta, chumbo na malta.",
         "Semana de Ramos lavam-se os panos.",
         "Semana da Paixão lavar-se-ão ou não."
+    ],
+    "carnival": [
+        "Carnaval na eira, Páscoa à lareira.",
+        "Entrudo borralheiro, Páscoa soalheira.",
+        "É carnaval ninguém leva a mal.",
+        "Não há Entrudo sem Lua Nova nem Páscoa sem Lua Cheia.",
+        "No Entrudo come-se tudo.",
+        "Esta vida são dois dias. O Carnaval, são três.",
+        "Fartar, gatos, que é dia de Entrudo.",
+        "Carnaval na rua: Páscoa em casa."
+    ],
+    "carnival-day": [
+        "Alegrias entrudo, que amanhã será cinza."
+    ],
+    "lent": [
+        "Salmão e sermão têm na Quaresma a sua estação.",
+        "No Natal, fiar; no Entrudo, dobar; na Quaresma, tecer; e na Páscoa, coser."
     ]
 }

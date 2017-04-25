@@ -28,7 +28,7 @@ function isDateKeyBetweenDates(dateKey, beginDateKey, endDateKey) {
 
 function isDateInDynamicRange(dateKey, key, seasonConfigObj, festiveSeasonsKey) {
     const strategyName = seasonConfigObj[festiveSeasonsKey][key];
-    if (DynamicSeasonsHelper.isValid(strategyName)) {
+    if (DynamicSeasonsHelper.isNameValid(strategyName)) {
         const seasonDateRange = DynamicSeasonsHelper.calcDateRange(strategyName);
         const dateFromDateKey = DateHelper.buildDateFromDateKey(dateKey);
 
@@ -77,6 +77,10 @@ export default class DateHelper {
             isDateInDynamicRange(dateKey, key, seasonConfigObj, festiveSeasonsKey));
     }
 
+    static isDayInMonth(day, month) {
+        return day >= 1 && day <= moment().month(month).daysInMonth();
+    }
+
     static formatMonthForDate(date) {
         return moment(date).format('MMM');
     }
@@ -95,5 +99,13 @@ export default class DateHelper {
 
     static getDaysInMonth(year, monthIndex) {
         return moment([year, monthIndex]).daysInMonth();
+    }
+
+    static isDayToday(date) {
+        return moment().format('Y-M-D') === date.format('Y-M-D');
+    }
+
+    static isSameMonthYear(date) {
+        return moment().format('Y-M') === date.format('Y-M');
     }
 }

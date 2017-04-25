@@ -69,7 +69,7 @@ export default class ProverbEngine {
                 while (++i <= daysInMonth) {
                     const date = moment([currentYear, monthIndex, i]);
                     const dateKey = DateHelper.formatDateKey(date);
-                    const formattedMonth = DateHelper.formatMonthForDate(date);
+                    const formattedMonth = DateHelper.formatMonthForDate(date).toLowerCase();
 
                     const proverbsPriorityParams = [dateKey, dateKey, dateKey, dateKey,
                         formattedMonth, dateKey, dateKey,];

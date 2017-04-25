@@ -1,10 +1,7 @@
 import _ from 'lodash';
+import DateHelper from '../date-helper';
 
 const moment = require('moment');
-
-function isDayInMonth(day, month) {
-    return day >= 1 && day <= moment().month(month).daysInMonth();
-}
 
 function getDayForApril(d, e, M) {
     if (d === 29 && e === 6) {
@@ -33,7 +30,7 @@ const Computus = (year) => {
     const e = (2 * b + 4 * c + 6 * d + N) % 7;
     const dayForMarch = 22 + d + e;
 
-    if (isDayInMonth(dayForMarch, 'mar')) {
+    if (DateHelper.isDayInMonth(dayForMarch, 'mar')) {
         // dayForMarch + 1 toDate reach monday after
         toDate = moment([year, 2, dayForMarch + 1]);
     } else {
