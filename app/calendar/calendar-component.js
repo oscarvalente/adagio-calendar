@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
 import CalendarService from '../calendar-service';
+import styling from './calendar.scss';
+import template from './calendar.html';
+import merge from 'lodash/merge';
 
 function setProverb(proverb, day) {
     day.proverb = proverb;
@@ -9,12 +12,16 @@ function setMonthCalendarData(monthKey, days) {
     calendarData[monthKey].days = days;
 }
 
+function setDayCalendarData(monthKey, dayIndex, days) {
+    calendarData[monthKey].days[dayIndex] = days;
+}
+
 let calendarData;
 
 @Component({
     selector: 'adg-calendar',
-    styles: [require('./calendar.scss')],
-    template: require('./calendar.html'),
+    styles: [styling],
+    template,
     providers: [CalendarService]
 })
 export class CalendarComponent {
@@ -47,10 +54,10 @@ export class CalendarComponent {
 
     selectDay(day) {
         CalendarService.updateWithSelection(day, this.days)
-            .subscribe((days) => {
-                this.days = days;
-                calendarData[this.month].days = this.days;
-                setMonthCalendarData(this.month, this.days);
+            .subscribe((day) => {
+                const dayIndex = day.title - 1;
+                merge(this.days[dayIndex], day);
+                setDayCalendarData(this.month, dayIndex, day);
             });
     }
 

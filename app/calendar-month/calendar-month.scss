@@ -7,14 +7,50 @@
     align-self: center;
   }
 
-  #month-title {
-    color: #101b3a;
-    font-family: 'Estrangelo Edessa', 'cursive';
-    font-size: 60px;
-    width: 27%;
-    font-weight: bold;
-    text-align: center;
-    text-transform: uppercase;
+  .month-title-container {
+    overflow: hidden;
+
+    #month-title {
+      color: #101b3a;
+      font-family: 'Estrangelo Edessa', 'cursive';
+      font-size: 60px;
+      width: 27%;
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+
+
+      .slide-out-left, .slide-out-right {
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+      }
+
+      .slide-out-left {
+        animation-name: slide-out-left;
+      }
+
+      .slide-out-right {
+        animation-name: slide-out-right;
+      }
+
+      @keyframes slide-out-right {
+        from {
+          margin-left: 0;
+        }
+        to {
+          margin-left: 100%;
+        }
+      }
+
+      @keyframes slide-out-left {
+        from {
+          margin-right: 0;
+        }
+        to {
+          margin-right: 100%;
+        }
+      }
+    }
   }
 
   .left-arrow, .right-arrow {

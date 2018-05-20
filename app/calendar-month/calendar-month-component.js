@@ -1,18 +1,17 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import CalendarService from '../calendar-service';
-
+import styling from './calendar-month.scss';
+import template from './calendar-month.html';
 
 const moment = require('moment');
 
 @Component({
     selector: 'adg-calendar-month',
-    styles: [require('./calendar-month.scss')],
-    template: require('./calendar-month.html')
+    styles: [styling],
+    template
 })
 export class CalendarMonthComponent {
     @Input('month-vm') monthVM;
     @Output() onMonthChange = new EventEmitter();
-
 
     ngOnChanges(changes) {
         if (changes.monthVM) {

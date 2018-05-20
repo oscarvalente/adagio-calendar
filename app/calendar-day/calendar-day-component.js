@@ -1,26 +1,26 @@
 import {Component, Input} from '@angular/core';
+import styling from './calendar-day.scss';
+import template from './calendar-day.html';
 
 @Component({
     selector: 'adg-calendar-day',
-    styles: [require('./calendar-day.scss')],
-    template: require('./calendar-day.html')
+    styles: [styling],
+    template
 })
 export class CalendarDayComponent {
     @Input('day-vm') dayVM;
 
-    ngOnInit() {
-        this.styles = {
-            isMagnified: false
-        };
-    }
-
     ngOnChanges(changes) {
         if (changes['dayVM']) {
+            changes.dayVM.currentValue.styles = {
+                isMagnified: changes.dayVM.currentValue.isSelected
+            };
             this.day = changes.dayVM.currentValue;
+            if (changes.dayVM.currentValue.styles.isMagnified === true) {
+                setTimeout(() => {
+                    this.day.styles.isMagnified = false;
+                }, 1500);
+            }
         }
-    }
-
-    magnifyProverb() {
-        this.styles.isMagnified = true;
     }
 }

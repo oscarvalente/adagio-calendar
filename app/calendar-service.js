@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import Rx from 'rxjs/Rx';
+import clone from 'lodash/clone';
 
 import DateHelper from './utils/date-helper';
 import ProverbEngine from './proverbs/proverb-engine';
@@ -34,13 +35,13 @@ export default class CalendarService {
             .toArray();
     }
 
-    static updateWithSelection(day, daysVM = []) {
+    static updateWithSelection(day, daysVM) {
         return Rx.Observable.from(daysVM)
             .map(dayVM => {
-                dayVM.isSelected = dayVM.title === day;
-                return dayVM;
-            })
-            .toArray();
+                const dayClone = clone(dayVM);
+                dayClone.isSelected = dayClone.title === day;
+                return dayClone;
+            });
     }
 
     static buildDaysViewModelWithProverbs(month = moment().month()) {

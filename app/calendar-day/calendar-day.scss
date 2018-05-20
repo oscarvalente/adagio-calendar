@@ -34,9 +34,23 @@
     }
 
     .day-proverb {
-      font-size: 16px;
-      line-height: 17px;
-      color: #101b3a;
+      &.has-proverb {
+        font-size: 16px;
+        line-height: 17px;
+        color: #101b3a;
+        position: absolute;
+        // TODO: transition (overflow/proverb height)
+        transition: all 1.5s linear;
+
+        &.magnify {
+          top: calc(50% - 170px);
+          left: 10%;
+          font-size: 109px;
+          line-height: 85px;
+          width: 80%;
+          text-align: center;
+        }
+      }
     }
 
     .day-title, .day-proverb {
